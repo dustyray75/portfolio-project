@@ -1,0 +1,107 @@
+$color-teal: #17A2B8;
+$color-primary: #ffd700;
+$color-secondary: #Daa520;
+$color-pale: #CEC8FF;
+$color-mid: #901CAD;
+$color-dark: #60106b;
+$color-mvr: #c71585;
+$color-lsg: #20b2aa;
+$color-DarkBlue: #00008B;
+$color-black-transparent: rgba(0, 0, 0, 0.5);
+
+$body-font: "Open Sans", sans-serif;
+$header-font: "Lobster", cursive;
+
+$assetPath: "/gif/AFW_files";
+
+
+body {
+    font-family: $body-font;
+    background: url(#{$assetPath}/1361276.jpg);
+    background-size: cover;
+
+}
+
+h1,
+h2,
+h3 {
+    font-family: $header-font;
+}
+
+h2 {
+    color: $color-primary;
+}
+
+header {
+    h2 {
+        color: $color-DarkBlue;
+    }
+}
+
+.site-footer {
+    background-image: linear-gradient($color-lsg, white);
+    padding: 20px 0;
+
+}
+
+.btn-darkblue {
+    color: $color-DarkBlue;
+
+}
+
+.jumbotron {
+    margin: 0;
+    padding: 30px;
+    background-image: linear-gradient(to right, $color-secondary, $color-primary, $color-dark);
+    color: $color-mvr;
+}
+
+.row-content {
+    padding: 50px 0;
+    border-bottom: 3px ridge;
+    min-height: 200px;
+}
+
+.col-image {
+
+
+}
+
+.navbar {
+    background-color: $color-mvr;
+}
+
+.tab-content {
+    border: 1px solid #DDD;
+    border-top: none;
+    padding: 10px;
+}
+
+.carousel {
+    border: solid $color-secondary;
+}
+
+.carousel-caption {
+    background-color: $color-black-transparent;
+}
+
+#carouselButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+#reserveModal {
+    .modal-header {
+        background-color: $color-teal;
+        color: white;
+    }
+}
+
+#loginModal {
+    .modal-header {
+        background-color: $color-mid;
+        color: white;
+    }
+}

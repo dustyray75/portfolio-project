@@ -1,7 +1,7 @@
 const express = require('express');
-const campsiteRouter = express.Router();
+const contactRouter = express.Router();
 
-campsiteRouter.route('/')
+contactRouter.route('/')
 .all((req, res, next) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
@@ -22,4 +22,4 @@ campsiteRouter.route('/')
 });
 
 
-module.exports = campsiteRouter;
+module.exports = contactRouter;

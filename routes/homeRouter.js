@@ -8,7 +8,7 @@ homeRouter.route('/')
     next();
 })
 .get((req, res) => {
-    res.end('Will send all the home information to you');
+    res.end('Will send all the home information to you ASAP');
 })
 .post((req, res) => {
     res.statusCode = 403;
