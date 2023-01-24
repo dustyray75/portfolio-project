@@ -1,24 +1,40 @@
 const express = require('express');
+const Login = require('../models/login');
+
 const loginRouter = express.Router();
 
 loginRouter.route('/')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
+.get((req, res, next) => {
+    Login.find()
+    .then(login => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(login);
+    })
+    .catch(err => next(err));
 })
-.get((req, res) => {
-    res.end('Will send all the login information to you');
-})
-.post((req, res) => {
-    res.end(`Will add the new login information: ${req.body.name} with description: ${req.body.description}`);
+.post((req, res, next) => {
+    Login.create(req.body)
+    .then(login => {
+        console.log('Login Created ', login);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(login);
+    })
+    .catch(err => next(err));
 })
 .put((req, res) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /login');
 })
 .delete((req, res) => {
-    res.end('Deleting all login information');
+    Login.deleteMany()
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+    .catch(err => next(err));
 });
 
 

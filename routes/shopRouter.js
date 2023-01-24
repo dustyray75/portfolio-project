@@ -1,24 +1,40 @@
 const express = require('express');
+const Shop = require('../models/shop');
+
 const shopRouter = express.Router();
 
 shopRouter.route('/')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
+.get((req, res, next) => {
+    Shop.find()
+    .then(items => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(items);
+    })
+    .catch(err => next(err));
 })
-.get((req, res) => {
-    res.end('Will send all the shoppable items to you');
-})
-.post((req, res) => {
-    res.end(`Will add the item: ${req.body.name} with description: ${req.body.description}`);
+.post((req, res, next) => {
+    Shop.create(req.body)
+    .then(item => {
+        console.log('Shop Created ', item);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(item);
+    })
+    .catch(err => next(err));
 })
 .put((req, res) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /shop');
 })
-.delete((req, res) => {
-    res.end('Deleting all shoppable items');
+.delete((req, res, next) => {
+    Shop.deleteMany()
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+    .catch(err => next(err));
 });
 
 

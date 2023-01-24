@@ -1,17 +1,21 @@
 const express = require('express');
+const AboutUs = require('../models/aboutus');
+
 const aboutUsRouter = express.Router();
 
 aboutUsRouter.route('/')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
+.get((req, res, next) => {
+    AboutUs.find()
+    .then(aboutus => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(aboutus);
+    })
+    .catch(err => next(err));
 })
-.get((req, res) => {
-    res.end('Will send all the information about us to you');
-})
-.post((req, res) => {
-    res.end(`Will add the aboutUS content: ${req.body.name} with description: ${req.body.description}`);
+.post((req, res, next) => {
+    res.statusCode = 403;
+    res.end('POST operation not supported on /aboutUs');
 })
 .put((req, res) => {
     res.statusCode = 403;

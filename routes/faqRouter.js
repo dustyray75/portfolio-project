@@ -1,24 +1,40 @@
 const express = require('express');
+const FAQ = require('../models/faq');
+
 const faqRouter = express.Router();
 
 faqRouter.route('/')
-.all((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
+.get((req, res, next) => {
+    FAQ.find()
+    .then(faq => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(faq);
+    })
+    .catch(err => next(err));
 })
-.get((req, res) => {
-    res.end('Will send all the FAQs to you');
-})
-.post((req, res) => {
-    res.end(`Will add the FAQ: ${req.body.name} with description: ${req.body.description}`);
+.post((req, res, next) => {
+    FAQ.create(req.body)
+    .then(faq => {
+        console.log('FAQ Created ', faq);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(faq);
+    })
+    .catch(err => next(err));
 })
 .put((req, res) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /faq');
 })
-.delete((req, res) => {
-    res.end('Deleting all FAQs');
+.delete((req, res, next) => {
+    FAQ.deleteMany()
+    .then(response => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(response);
+    })
+    .catch(err => next(err));
 });
 
 
