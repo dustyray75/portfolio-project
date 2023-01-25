@@ -13,7 +13,7 @@ const loginSchema = new Schema({
         required: true
     },
     Address: {
-        type: string,
+        type: String,
         required: true
     },
     phone: {

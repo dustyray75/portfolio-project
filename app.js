@@ -7,7 +7,7 @@ const logger = require('morgan');
 const aboutusRouter = require('./routes/aboutusRouter');
 const contactRouter = require('./routes/contactRouter');
 const faqRouter = require('./routes/faqRouter');
-const homeRouter = require('./routes/homeRouter');
+const indexRouter = require('./routes/indexRouter');
 const loginRouter = require('./routes/loginRouter');
 const membersRouter = require('./routes/membersRouter');
 const shopRouter = require('./routes/shopRouter');
@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', indexRouter);
 app.use('/aboutus', aboutusRouter);
 app.use('/contact', contactRouter);
 app.use('/faq', faqRouter);

@@ -13,7 +13,7 @@ const contactSchema = new Schema({
         required: true
     },
     Address: {
-        type: string,
+        type: String,
         required: true
     },
     phone: {
